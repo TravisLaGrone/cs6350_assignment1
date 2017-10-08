@@ -7,18 +7,18 @@ import java.util.stream.Collectors;
 
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
+import org.apache.hadoop.io.VIntWritable;
 import org.apache.hadoop.mapreduce.Mapper;
 
-public class Q1Mapper extends Mapper<Text, Text, Q1IntermediateKey, NullWritable>
+public class Q1Mapper extends Mapper<Text, Text, Q1IntermediateKey, VIntWritable>
 {
 	private Q1IntermediateKey intermediateKey = new Q1IntermediateKey();
-	private static final NullWritable intermediateValue = NullWritable.get();
+	private VIntWritable intermediateValue = new VIntWritable();
 
 	@Override
-	protected void map(Text rawKey, Text rawValue, Mapper<Text, Text, Q1IntermediateKey, NullWritable>, Context context)
+	protected void map(Text rawKey, Text rawValue, Context context)
 			throws IOException, InterruptedException
 	{
-		// TODO Auto-generated method stub
 		String key = rawKey.toString();
 		String value = rawValue.toString();
 		
@@ -33,6 +33,8 @@ public class Q1Mapper extends Mapper<Text, Text, Q1IntermediateKey, NullWritable
 				
 				if (!friend.equals(user2)) {
 					intermediateKey.setFriend(friend);
+					intermediateValue.set(friend);
+					
 					context.write(intermediateKey, intermediateValue);
 				}
 			}
