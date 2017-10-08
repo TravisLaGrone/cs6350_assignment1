@@ -4,14 +4,26 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
+import org.apache.commons.collections4.comparators.ComparatorChain;
+
 import org.apache.hadoop.io.Writable;
+import org.apache.hadoop.io.WritableComparable;
 import org.apache.hadoop.io.WritableUtils;
 
-public class Q1IntermediateKey implements Writable
+public class Q1IntermediateKey implements Writable, WritableComparable<Q1IntermediateKey>
 {
+	private static final ComparatorChain<Q1IntermediateKey> comparator;
+	
 	private int user1;
 	private int user2;
 	private int friend;
+	
+	static {
+		comparator = new ComparatorChain<>();
+		comparator.addComparator((a,b) -> Integer.compare(a.user1, b.user1));
+		comparator.addComparator((a,b) -> Integer.compare(a.user2, b.user2));
+		comparator.addComparator((a,b) -> Integer.compare(a.friend, b.friend));
+	}
 
 	public Q1IntermediateKey() { }
 	
@@ -36,6 +48,12 @@ public class Q1IntermediateKey implements Writable
 		user1 = WritableUtils.readVInt(in);
 		user2 = WritableUtils.readVInt(in);
 		friend = WritableUtils.readVInt(in); 
+	}
+	
+	@Override
+	public int compareTo(Q1IntermediateKey that)
+	{
+		return comparator.compare(this, that);
 	}
 	
 	@Override
