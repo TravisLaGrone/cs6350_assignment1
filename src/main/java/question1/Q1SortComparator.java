@@ -4,7 +4,7 @@ import org.apache.commons.collections4.comparators.ComparatorChain;
 import org.apache.hadoop.io.WritableComparable;
 import org.apache.hadoop.io.WritableComparator;
 
-public class Q1KeySortComparator extends WritableComparator
+public class Q1SortComparator extends WritableComparator
 {
 	private static final ComparatorChain<Q1IntermediateKey> comparator;
 	
@@ -15,7 +15,7 @@ public class Q1KeySortComparator extends WritableComparator
 		comparator.addComparator((a,b) -> Integer.compare(a.getFriend(), b.getFriend()));
 	}
 	
-	public Q1KeySortComparator()
+	public Q1SortComparator()
 	{
 		super(Q1IntermediateKey.class, true);
 	}
