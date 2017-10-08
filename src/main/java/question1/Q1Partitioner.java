@@ -9,8 +9,7 @@ public class Q1Partitioner extends Partitioner<Q1IntermediateKey, NullWritable>
 	@Override
 	public int getPartition(Q1IntermediateKey key, NullWritable value, int numPartitions)
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return (key.getUser1() + key.getUser2()) % numPartitions;
 	}
 
 }
