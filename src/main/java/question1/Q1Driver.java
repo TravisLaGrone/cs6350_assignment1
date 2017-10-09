@@ -14,9 +14,6 @@ import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
 public class Q1Driver
 {
-	private static final Path inputDir = new Path("/socNetData/networkdata");
-	private static final Path outputDir = inputDir;
-	
 	public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException
 	{
 		Configuration conf = new Configuration();
@@ -25,8 +22,11 @@ public class Q1Driver
 		
 		Job job = Job.getInstance(conf);
 		job.setJobName("Question 1");
-		
 		job.setJarByClass(Q1Driver.class);
+		
+		Path inputDir = new Path(args[0]);
+		Path outputDir = new Path(args[1]);
+		
 		FileInputFormat.addInputPath(job, inputDir);
 		FileOutputFormat.setOutputPath(job, outputDir);
 		
