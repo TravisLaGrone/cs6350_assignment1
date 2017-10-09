@@ -11,6 +11,6 @@
  * their mutual friend lists ranked by count of mutual friends.  The intermediate output of the first and
  * second jobs is written to a temporary file that is removed following the third job.
  * <p>
- * {@link question2.Driver} contains the <code>main</code> method for this query.
+ * {@link question2.Q2Driver} contains the <code>main</code> method for this query.
  */
 package question2;
