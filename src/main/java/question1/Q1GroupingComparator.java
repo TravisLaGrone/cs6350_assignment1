@@ -19,6 +19,7 @@ public class Q1GroupingComparator extends WritableComparator
 		super(Q1IntermediateKey.class, true);
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public int compare(WritableComparable a, WritableComparable b)
 	{
